@@ -576,7 +576,7 @@ spec:
     spec:
       containers:
       - name: sleep
-        image: tutum/curl
+        image: quay.io/maistra/tutum-curl:0.0-ibm-p
         command: ["/bin/sleep","infinity"]
         imagePullPolicy: IfNotPresent
 `
@@ -613,7 +613,7 @@ spec:
     spec:
       containers:
       - name: sleep
-        image: tutum/curl
+        image: quay.io/maistra/tutum-curl:0.0-ibm-p
         command: ["/bin/sleep","infinity"]
         imagePullPolicy: IfNotPresent
         volumeMounts:
