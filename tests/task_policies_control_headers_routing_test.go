@@ -58,7 +58,7 @@ func TestControlHeadersRouting(t *testing.T) {
 	}
 
 	log.Info("Output Producing Adapters")
-	util.Shell("kubectl run keyval --generator=run-pod/v1 --image=gcr.io/istio-testing/keyval:release-1.1 --namespace %s --port 9070 --expose", meshNamespace)
+	util.Shell("kubectl run keyval --generator=run-pod/v1 --image=quay.io/maistra/keyval:0.0-ibm-p --namespace %s --port 9070 --expose", meshNamespace)
 	util.CheckPodRunning(meshNamespace, "run=keyval", kubeconfig)
 	util.KubeApply(meshNamespace, keyvaltemplate, kubeconfig)
 	util.KubeApply(meshNamespace, keyvalYaml, kubeconfig)
@@ -91,7 +91,7 @@ func TestControlHeadersRouting(t *testing.T) {
 		util.Inspect(err, "Failed to get HTTP Response", "", t)
 		body, err := ioutil.ReadAll(resp.Body)
 		util.Inspect(err, "Failed to read response body", "", t)
-		if strings.Contains(string(body), "\"User-Group\": \"admin\"") {
+		if strings.Contains(string(body), "\"User-Group\":\"admin\"") {
 			log.Infof("Get expected headers: %s", string(body))
 		} else {
 			t.Errorf("Missing User-Group: admin headers: %s", string(body))
